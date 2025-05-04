@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es-HN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASER S. de R.L. | Asesoría Empresarial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #0052A2;
+            --color-primary-light: #3a7bbd;
+            --color-secondary: #00A859;
+            --color-secondary-light: #34c177;
+            --color-dark: #333;
+            --color-light: #f8f9fa;
+            --color-gray: #6c757d;
+            --color-danger: #dc3545;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            color: var(--color-primary);
+            font-size: 1.2rem;
+        }
+
+        .logo-slogan {
+            font-size: 0.8rem;
+            color: var(--color-secondary);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Onboarding Section */
+        #onboarding {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .onboarding-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .onboarding-header h1 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .onboarding-header p {
+            color: var(--color-gray);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 82, 162, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--color-primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-secondary-light);
+        }
+
+        /* Dashboard Section */
+        #dashboard {
+            display: none;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .progress-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-secondary);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--color-gray);
+        }
+
+        /* Gantt Chart */
+        .gantt-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            overflow-x: auto;
+        }
+
+        .gantt-header {
+            display: grid;
+            grid-template-columns: 200px repeat(31, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .gantt-header-item {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 4px;
+        }
+
+        .gantt-task {
+            display: grid;
+            grid-template-columns: 200px repeat(31, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .gantt-task-name {
+            padding: 0.5rem;
+            font-weight: 600;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .gantt-bar-container {
+            position: relative;
+            height: 30px;
+            grid-column: 2 / span 31;
+        }
+
+        .gantt-bar {
+            position: absolute;
+            height: 60%;
+            top: 20%;
+            background-color: var(--color-primary-light);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .gantt-bar-progress {
+            height: 100%;
+            background-color: var(--color-secondary);
+            border-radius: 4px;
+            width: 0%;
+        }
+
+        /* Knowledge Base */
+        .knowledge-base {
+            margin-top: 2rem;
+        }
+
+        .accordion {
+            margin-bottom: 1rem;
+        }
+
+        .accordion-header {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            background-color: #f8f9fa;
+        }
+
+        .accordion-content {
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--shadow-sm);
+            display: none;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        /* Assistant */
+        .assistant-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .assistant-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .assistant-chat {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .assistant-chat.active {
+            display: block;
+        }
+
+        .chat-header {
+            padding: 1rem;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .gantt-header {
+                grid-template-columns: 150px repeat(31, 1fr);
+            }
+
+            .gantt-task {
+                grid-template-columns: 150px repeat(31, 1fr);
+            }
+
+            .gantt-header-item {
+                font-size: 0.6rem;
+                padding: 0.2rem 0;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 1rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNTAiPjxwYXRoIGZpbGw9IiMwMDUyQTIiIGQ9Ik0xNSAxMGgxNzB2MzBIMTV6Ii8+PHRleHQgeD0iMTAwIiB5PSIzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QVNFUiBTLiBkZSBSLkwuPC90ZXh0Pjwvc3ZnPg==" alt="ASER S. de R.L." class="logo-img">
+                <div>
+                    <div class="logo-text">ASER S. de R.L.</div>
+                    <div class="logo-slogan">De la idea al negocio, sin perder un paso</div>
+                </div>
+            </a>
+            <div id="user-menu"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Onboarding Section -->
+        <section id="onboarding">
+            <div class="onboarding-header">
+                <h1>Crea tu empresa en Honduras</h1>
+                <p>Te guiaremos paso a paso en el proceso de formación de tu empresa</p>
+            </div>
+            <form id="onboarding-form">
+                <div class="form-group">
+                    <label for="business-type" class="form-label">Tipo de empresa</label>
+                    <select id="business-type" class="form-control" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="SRL">Sociedad de Responsabilidad Limitada (S. de R.L.)</option>
+                        <option value="SA">Sociedad Anónima (S.A.)</option>
+                        <option value="PN">Persona Natural</option>
+                        <option value="OTRO">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="business-sector" class="form-label">Sector de tu negocio</label>
+                    <select id="business-sector" class="form-control" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="COMERCIO">Comercio</option>
+                        <option value="SERVICIOS">Servicios</option>
+                        <option value="MANUFACTURA">Manufactura</option>
+                        <option value="AGRICULTURA">Agricultura</option>
+                        <option value="TECNOLOGIA">Tecnología</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="business-budget" class="form-label">Presupuesto inicial (en Lempiras)</label>
+                    <input type="number" id="business-budget" class="form-control" placeholder="Ej: 50000" required>
+                </div>
+                <div class="form-group">
+                    <label for="business-name" class="form-label">Nombre de tu empresa (opcional)</label>
+                    <input type="text" id="business-name" class="form-control" placeholder="Ej: Mi Negocio Honduras">
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-secondary">Comenzar mi plan</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="hidden">
+            <div class="dashboard-header">
+                <h2 id="dashboard-title">Plan de formación empresarial</h2>
+                <div id="user-info"></div>
+            </div>
+
+            <div class="progress-card">
+                <h3 class="progress-title">Progreso general</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="overall-progress"></div>
+                </div>
+                <p class="progress-text">Has completado <span id="progress-percent">0</span>% de los trámites</p>
+            </div>
+
+            <div class="gantt-container">
+                <h3>Plan de trámites</h3>
+                <p class="mb-3">Tu línea de tiempo personalizada para formar tu empresa</p>
+                <div id="gantt-chart">
+                    <!-- Gantt chart will be generated here -->
+                </div>
+            </div>
+
+            <div class="knowledge-base">
+                <h3>Base de conocimiento</h3>
+                <p>Encuentra aquí toda la información que necesitas para cada trámite</p>
+                
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>¿Cómo registrar mi empresa en el RNPC?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Para registrar tu empresa en el Registro Nacional de las Personas Jurídicas y Civiles (RNPC) debes:</p>
+                        <ol>
+                            <li>Presentar solicitud de reserva de nombre</li>
+                            <li>Elaborar los estatutos de la sociedad</li>
+                            <li>Protocolizar los estatutos ante notario</li>
+                            <li>Presentar solicitud de inscripción en el RNPC</li>
+                        </ol>
+                        <p><strong>Costo aproximado:</strong> L. 2,500 - L. 5,000</p>
+                        <p><strong>Tiempo estimado:</strong> 5-10 días hábiles</p>
+                        <a href="https://www.rnp.hn" target="_blank" class="btn">Visitar RNPC</a>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>¿Cómo inscribirme en el SAR?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Para inscribirte en el Servicio de Administración de Rentas (SAR) debes:</p>
+                        <ol>
+                            <li>Obtener tu RTN (Registro Tributario Nacional)</li>
+                            <li>Registrarte como contribuyente</li>
+                            <li>Determinar tu régimen tributario</li>
+                            <li>Activar tu facturación electrónica</li>
+                        </ol>
+                        <p><strong>Costo aproximado:</strong> Gratis</p>
+                        <p><strong>Tiempo estimado:</strong> 1-3 días hábiles</p>
+                        <a href="https://www.sar.gob.hn" target="_blank" class="btn">Visitar SAR</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Assistant -->
+    <div class="assistant-container">
+        <div class="assistant-chat" id="assistant-chat">
+            <div class="chat-header">
+                <span>Asistente Virtual</span>
+                <button id="close-chat"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="chat-message bot-message">
+                    <p>¡Hola! Soy tu asistente para la formación de empresas. ¿En qué puedo ayudarte hoy?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Escribe tu pregunta...">
+                <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="assistant-btn" id="assistant-btn">
+            <i class="fas fa-robot"></i>
+        </button>
+    </div>
+
+    <script>
+        // Datos de trámites por tipo de empresa
+        const tramitesData = {
+            "SRL": [
+                { id: 1, name: "Reserva de nombre", duration: 2, start: 1, progress: 0, dependencies: [], cost: 500, institution: "RNPC" },
+                { id: 2, name: "Elaboración de estatutos", duration: 3, start: 3, progress: 0, dependencies: [1], cost: 3000, institution: "Notario" },
+                { id: 3, name: "Inscripción en RNPC", duration: 5, start: 6, progress: 0, dependencies: [2], cost: 2000, institution: "RNPC" },
+                { id: 4, name: "Obtención de RTN", duration: 1, start: 11, progress: 0, dependencies: [3], cost: 0, institution: "SAR" },
+                { id: 5, name: "Inscripción en SAR", duration: 2, start: 12, progress: 0, dependencies: [4], cost: 0, institution: "SAR" },
+                { id: 6, name: "Permiso municipal", duration: 10, start: 14, progress: 0, dependencies: [3], cost: 1500, institution: "Municipalidad" }
+            ],
+            "SA": [
+                // Similar structure for Sociedad Anónima
+            ],
+            "PN": [
+                // Similar structure for Persona Natural
+            ]
+        };
+
+        // Datos de conocimiento
+        const knowledgeData = {
+            "Reserva de nombre": {
+                description: "Proceso para reservar el nombre de tu empresa en el RNPC",
+                steps: [
+                    "Verificar disponibilidad del nombre",
+                    "Presentar solicitud de reserva",
+                    "Pagar tasa correspondiente"
+                ],
+                cost: "L. 500",
+                time: "1-2 días",
+                link: "https://www.rnp.hn"
+            }
+            // More knowledge items...
+        };
+
+        // Asistente virtual - preguntas frecuentes
+        const faq = {
+            "registro": "Para registrar tu empresa debes seguir estos pasos: 1) Reserva de nombre, 2) Elaboración de estatutos, 3) Protocolización ante notario, 4) Inscripción en RNPC.",
+            "costo": "El costo aproximado para formar una S. de R.L. es de L. 5,000 a L. 10,000, dependiendo de honorarios notariales.",
+            "tiempo": "El proceso completo toma entre 2 a 4 semanas, dependiendo de la agilidad en los trámites.",
+            "requisitos": "Los requisitos básicos son: 1) Copia de identidad de los socios, 2) Reserva de nombre, 3) Estatutos sociales, 4) Pago de tasas."
+        };
+
+        // DOM Elements
+        const onboardingForm = document.getElementById('onboarding-form');
+        const onboardingSection = document.getElementById('onboarding');
+        const dashboardSection = document.getElementById('dashboard');
+        const ganttChart = document.getElementById('gantt-chart');
+        const overallProgress = document.getElementById('overall-progress');
+        const progressPercent = document.getElementById('progress-percent');
+        const dashboardTitle = document.getElementById('dashboard-title');
+        const userInfo = document.getElementById('user-info');
+        const assistantBtn = document.getElementById('assistant-btn');
+        const assistantChat = document.getElementById('assistant-chat');
+        const closeChat = document.getElementById('close-chat');
+        const chatBody = document.getElementById('chat-body');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessage = document.getElementById('send-message');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        // Current user data
+        let userData = {
+            businessType: '',
+            businessSector: '',
+            businessBudget: 0,
+            businessName: '',
+            progress: {},
+            completedSteps: []
+        };
+
+        // Initialize the app
+        function initApp() {
+            // Check for saved data
+            const savedData = localStorage.getItem('aserUserData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+                showDashboard();
+            }
+
+            // Setup event listeners
+            setupEventListeners();
+        }
+
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Onboarding form submission
+            onboardingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                userData = {
+                    businessType: document.getElementById('business-type').value,
+                    businessSector: document.getElementById('business-sector').value,
+                    businessBudget: document.getElementById('business-budget').value,
+                    businessName: document.getElementById('business-name').value,
+                    progress: {},
+                    completedSteps: []
+                };
+
+                // Save to localStorage
+                localStorage.setItem('aserUserData', JSON.stringify(userData));
+                
+                showDashboard();
+            });
+
+            // Assistant button
+            assistantBtn.addEventListener('click', toggleAssistant);
+            closeChat.addEventListener('click', toggleAssistant);
+
+            // Send message in chat
+            sendMessage.addEventListener('click', sendChatMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+
+            // Accordion functionality
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    content.classList.toggle('active');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            });
+        }
+
+        // Show dashboard with user data
+        function showDashboard() {
+            onboardingSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+
+            // Set dashboard title
+            if (userData.businessName) {
+                dashboardTitle.textContent = `Plan para ${userData.businessName}`;
+            } else {
+                dashboardTitle.textContent = `Plan para tu ${getBusinessTypeName(userData.businessType)}`;
+            }
+
+            // Display user info
+            userInfo.innerHTML = `
+                <div>
+                    <strong>Sector:</strong> ${getBusinessSectorName(userData.businessSector)}<br>
+                    <strong>Presupuesto:</strong> L. ${Number(userData.businessBudget).toLocaleString('es-HN')}
+                </div>
+            `;
+
+            // Generate Gantt chart
+            generateGanttChart();
+
+            // Calculate and display progress
+            updateProgress();
+        }
+
+        // Generate Gantt chart based on business type
+        function generateGanttChart() {
+            const tasks = tramitesData[userData.businessType] || [];
+            
+            // Clear existing chart
+            ganttChart.innerHTML = '';
+
+            // Create header
+            const header = document.createElement('div');
+            header.className = 'gantt-header';
+            
+            // Add empty cell for task names
+            const headerName = document.createElement('div');
+            headerName.className = 'gantt-header-item';
+            headerName.textContent = 'Trámite';
+            header.appendChild(headerName);
+            
+            // Add days
+            for (let i = 1; i <= 31; i++) {
+                const day = document.createElement('div');
+                day.className = 'gantt-header-item';
+                day.textContent = i;
+                header.appendChild(day);
+            }
+            
+            ganttChart.appendChild(header);
+
+            // Add tasks
+            tasks.forEach(task => {
+                const taskRow = document.createElement('div');
+                taskRow.className = 'gantt-task';
+                
+                // Task name
+                const taskName = document.createElement('div');
+                taskName.className = 'gantt-task-name';
+                taskName.textContent = task.name;
+                taskRow.appendChild(taskName);
+                
+                // Task bar container
+                const barContainer = document.createElement('div');
+                barContainer.className = 'gantt-bar-container';
+                
+                // Task bar
+                const taskBar = document.createElement('div');
+                taskBar.className = 'gantt-bar';
+                taskBar.style.width = `${(task.duration / 31) * 100}%`;
+                taskBar.style.left = `${((task.start - 1) / 31) * 100}%`;
+                
+                // Progress bar
+                const progressBar = document.createElement('div');
+                progressBar.className = 'gantt-bar-progress';
+                progressBar.style.width = `${userData.progress[task.id] || 0}%`;
+                
+                taskBar.appendChild(progressBar);
+                barContainer.appendChild(taskBar);
+                
+                // Add click event to update progress
+                taskBar.addEventListener('click', function() {
+                    updateTaskProgress(task.id);
+                });
+                
+                taskRow.appendChild(barContainer);
+                ganttChart.appendChild(taskRow);
+            });
+        }
+
+        // Update task progress
+        function updateTaskProgress(taskId) {
+            if (!userData.progress[taskId]) {
+                userData.progress[taskId] = 0;
+            }
+            
+            userData.progress[taskId] += 25;
+            if (userData.progress[taskId] > 100) {
+                userData.progress[taskId] = 0;
+            }
+            
+            // Update in localStorage
+            localStorage.setItem('aserUserData', JSON.stringify(userData));
+            
+            // Regenerate Gantt chart
+            generateGanttChart();
+            updateProgress();
+        }
+
+        // Update overall progress
+        function updateProgress() {
+            const tasks = tramitesData[userData.businessType] || [];
+            if (tasks.length === 0) return;
+            
+            let totalProgress = 0;
+            tasks.forEach(task => {
+                totalProgress += userData.progress[task.id] || 0;
+            });
+            
+            const avgProgress = Math.round(totalProgress / tasks.length);
+            
+            overallProgress.style.width = `${avgProgress}%`;
+            progressPercent.textContent = avgProgress;
+        }
+
+        // Assistant functions
+        function toggleAssistant() {
+            assistantChat.classList.toggle('active');
+        }
+
+        function sendChatMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            // Add user message to chat
+            addChatMessage(message, 'user');
+            
+            // Process message and get response
+            const response = processChatMessage(message);
+            
+            // Add bot response to chat
+            setTimeout(() => {
+                addChatMessage(response, 'bot');
+            }, 500);
+            
+            // Clear input
+            chatInput.value = '';
+        }
+
+        function addChatMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}-message`;
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function processChatMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('registro') || lowerMessage.includes('registrar')) {
+                return faq.registro;
+            } else if (lowerMessage.includes('costo') || lowerMessage.includes('precio')) {
+                return faq.costo;
+            } else if (lowerMessage.includes('tiempo') || lowerMessage.includes('durar')) {
+                return faq.tiempo;
+            } else if (lowerMessage.includes('requisito') || lowerMessage.includes('necesito')) {
+                return faq.requisitos;
+            } else {
+                return "No estoy seguro de entender tu pregunta. Puedes preguntar sobre: registro, costo, tiempo o requisitos para formar tu empresa.";
+            }
+        }
+
+        // Helper functions
+        function getBusinessTypeName(type) {
+            const types = {
+                "SRL": "Sociedad de Responsabilidad Limitada",
+                "SA": "Sociedad Anónima",
+                "PN": "Empresa Individual (Persona Natural)"
+            };
+            return types[type] || "empresa";
+        }
+
+        function getBusinessSectorName(sector) {
+            const sectors = {
+                "COMERCIO": "Comercio",
+                "SERVICIOS": "Servicios",
+                "MANUFACTURA": "Manufactura",
+                "AGRICULTURA": "Agricultura",
+                "TECNOLOGIA": "Tecnología"
+            };
+            return sectors[sector] || sector;
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
